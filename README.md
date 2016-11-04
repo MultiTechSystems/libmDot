@@ -1,10 +1,10 @@
 The Dot library provides a LoRaWan certified stack for LoRa communication using MultiTech mDot and xDot devices. The stack is compatible with mbed 5.
 
 The name of the repository can be used to determine which device the stack was compiled for and if it's a development or production-ready build:
-  * [libmDot-mbed5](http://developer.mbed.org/teams/MultiTech/code/libmDot-mbed5/) -> production-ready build for mDot
-  * [libmDot-dev-mbed5](http://developer.mbed.org/teams/MultiTech/code/libmDot-dev-mbed5/) -> development build for mDot
-  * [libxDot-mbed5](http://developer.mbed.org/teams/MultiTech/code/libxDot-mbed5/) -> production-ready build for xDot
-  * [libxDot-dev-mbed5](http://developer.mbed.org/teams/MultiTech/code/libxDot-dev-mbed5/) -> development build for xDot
+  * [libmDot-mbed5](http://github.com/MultiTechSystems/libmDot-mbed5/) -> production-ready build for mDot
+  * [libmDot-dev-mbed5](http://github.com/MultiTechSystems/libmDot-dev-mbed5/) -> development build for mDot
+  * [libxDot-mbed5](http://github.com/MultiTechSystems/libxDot-mbed5/) -> production-ready build for xDot
+  * [libxDot-dev-mbed5](http://github.com/MultiTechSystems/libxDot-dev-mbed5/) -> development build for xDot
 
 A changelog for the Dot library can be found [here](https://developer.mbed.org/teams/MultiTech/wiki/Dot-library-change-log).
 
