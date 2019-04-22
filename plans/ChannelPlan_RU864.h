@@ -13,8 +13,8 @@
  *
  */
 
-#ifndef __CHANNEL_PLAN_IN865_H__
-#define __CHANNEL_PLAN_IN865_H__
+#ifndef __CHANNEL_PLAN_RU864_H__
+#define __CHANNEL_PLAN_RU864_H__
 
 #include "Lora.h"
 #include "SxRadio.h"
@@ -23,31 +23,47 @@
 
 namespace lora {
 
-    const uint8_t  IN865_125K_NUM_CHANS = 16;         //!< Number of 125k channels in IN865 channel plan
-    const uint8_t  IN865_DEFAULT_NUM_CHANS = 3;       //!< Number of default channels in IN865 channel plan
-    const uint32_t IN865_125K_DEF_FREQ_1 = 865062500;
-    const uint32_t IN865_125K_DEF_FREQ_2 = 865402500;
-    const uint32_t IN865_125K_DEF_FREQ_3 = 865985000;
-    const uint32_t IN865_RX2_FREQ = 866550000;        //!< Frequency default for second rx window in IN865
-    const uint8_t  IN865_TX_POWER_MAX = 30;           //!< Max power for IN865 channel plan
-    const uint8_t  IN865_BEACON_DR = DR_4;            //!< Default beacon datarate
-    const uint32_t IN865_BEACON_FREQ = 866550000U;    //!< Default beacon broadcast frequency
+    const uint8_t RU864_125K_NUM_CHANS = 16;                    //!< Number of 125k channels in RU864 channel plan
+    const uint8_t RU864_DEFAULT_NUM_CHANS = 2;                  //!< Number of defualt channels in RU864 channel plan
+    const uint32_t RU864_125K_FREQ_BASE = 868900000;            //!< Frequency base for 125k RU864 uplink channels
+    const uint32_t RU864_125K_FREQ_STEP = 200000;               //!< Frequency step for 125k RU864 uplink channels
+    const uint32_t RU864_RX2_FREQ = 869100000;                  //!< Frequency default for second rx window in RU864
 
-    class ChannelPlan_IN865 : public lora::ChannelPlan {
+    const uint8_t RU864_TX_POWER_MAX = 16;                      //!< Max power for RU864 channel plan
+
+    // 0.1% duty cycle 864-866
+    const uint32_t RU864_MILLI_FREQ_MIN = 864000000;
+    const uint32_t RU864_MILLI_FREQ_MAX = 865000000;
+
+
+    const uint32_t RU864_FREQ_MIN = 864000000;
+    const uint32_t RU864_FREQ_MAX = 870000000;
+
+    const uint8_t RU864_MIN_DATARATE = (uint8_t) DR_0;           //!< Minimum transmit datarate for RU864
+    const uint8_t RU864_MAX_DATARATE = (uint8_t) DR_7;           //!< Maximum transmit datarate for RU864
+
+    const uint8_t RU864_MIN_DATARATE_OFFSET = (uint8_t) 0;       //!< Minimum transmit datarate for US915
+    const uint8_t RU864_MAX_DATARATE_OFFSET = (uint8_t) 5;       //!< Maximum transmit datarate for US915
+
+    const uint8_t  RU864_BEACON_DR = DR_3;                       //!< Default beacon datarate
+    const uint32_t RU864_BEACON_FREQ = 869100000U;               //!< Default beacon broadcast frequency
+    const uint32_t RU864_PING_SLOT_FREQ = 868900000U;            //!< Default ping slot frequency
+
+    class ChannelPlan_RU864 : public lora::ChannelPlan {
         public:
             /**
              * ChannelPlan constructor
              * @param radio SxRadio object used to set Tx/Rx config
              * @param settings Settings object
              */
-            ChannelPlan_IN865();
-            ChannelPlan_IN865(Settings* settings);
-            ChannelPlan_IN865(SxRadio* radio, Settings* settings);
+            ChannelPlan_RU864();
+            ChannelPlan_RU864(Settings* settings);
+            ChannelPlan_RU864(SxRadio* radio, Settings* settings);
 
             /**
              * ChannelPlan destructor
              */
-            virtual ~ChannelPlan_IN865();
+            virtual ~ChannelPlan_RU864();
 
             /**
              * Initialize channels, datarates and duty cycle bands according to current channel plan in settings
@@ -228,23 +244,6 @@ namespace lora {
             virtual void EnableDefaultChannels();
 
             /**
-             * Called when MAC layer doesn't know about a command.
-             * Use to add custom or new mac command handling
-             * @return LORA_OK
-             */
-            virtual uint8_t HandleMacCommand(uint8_t* payload, uint8_t& index);
-
-            /**
-             *Decrements the datarate based on TxDwellTime
-             */
-            virtual void DecrementDatarate();
-
-            /**
-             *Decrements the datarate based on TxDwellTime
-             */
-            virtual void IncrementDatarate();
-
-            /**
              * Check if this packet is a beacon and if so extract parameters needed
              * @param payload of potential beacon
              * @param size of the packet
@@ -257,20 +256,19 @@ namespace lora {
 
         protected:
 
-            static const uint8_t IN865_TX_POWERS[11];                    //!< List of available tx powers
-            static const uint8_t IN865_RADIO_POWERS[21];                 //!< List of calibrated tx powers
-            static const uint8_t IN865_MAX_PAYLOAD_SIZE[];              //!< List of max payload sizes for each datarate
-            static const uint8_t IN865_MAX_PAYLOAD_SIZE_REPEATER[];     //!< List of repeater compatible max payload sizes for each datarate
+            static const uint8_t RU864_TX_POWERS[8];                    //!< List of available tx powers
+            static const uint8_t RU864_RADIO_POWERS[21];                 //!< List of calibrated tx powers
+            static const uint8_t RU864_MAX_PAYLOAD_SIZE[];              //!< List of max payload sizes for each datarate
+            static const uint8_t RU864_MAX_PAYLOAD_SIZE_REPEATER[];     //!< List of repeater compatible max payload sizes for each datarate
 
             typedef struct __attribute__((packed)) {
-                uint8_t RFU1[1];
+                uint8_t RFU[2];
                 uint8_t Time[4];
                 uint8_t CRC1[2];
                 uint8_t GwSpecific[7];
-                uint8_t RFU2[3];
                 uint8_t CRC2[2];
             } BCNPayload;
     };
 }
 
-#endif //__CHANNEL_PLAN_IN865_H__
+#endif //__CHANNEL_PLAN_RU864_H__
