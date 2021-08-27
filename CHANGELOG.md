@@ -1,3 +1,39 @@
+
+# Release 4.1.0
+
+* Update ChannelPlan_AU915.cpp - add max payload values for DR8-DR13
+* Fixed issue where accessing files and sleeping in different threads would cause the MDot to lock up.
+* Ability to save a backup of protected settings (Device ID, Network ID, Network Key, and Gen App Key) in MDot One-Time-Programmable storage.
+* FOTA session now checks file system for space required to complete file download and upgrade process.  If inadequate space is available files are removed.
+* Ability to set trigger for WAKE pin as rising, falling, or either.
+* Updated to MBed OS 6.8.
+* Support for AS923-4.
+
+
+# Release 4.0.0
+
+* LoRaWAN 1.0.4
+* Regional Parameters 1.0.3rA
+* FUOTA - Fragmentation and Multicast Setup v1.0.0
+* Support for EU868, US915, KR920, IN865, RU864, AU915, AS923-1, AS923-2, AS923-3 and AS923-JAPAN
+* Updated to MBed OS 6.1.
+
+* Configuration Updates
+** Changes to the configuration are not backwards compatible with previous versions
+** A device will lose all configuration and identification if reverted to a previous firmware
+** Configuration is saved with redundancy and wear leveling to increase resiliency and allow recovery after write errors due to loss of power or reset during a write cycle
+
+* mDot sleep can be interrupted by LowPowerTimer expiration when RTC_ALARM_OR_INTERRUPT is used.
+
+* xDot now supports FUOTA when an external SPI flash is provided
+** Block Device Requirements
+*** For a block device to work with the XDot it must meet the following criteria:
+**** Work with MBed OS DataFlashBlockDevice or SPIFBlockDevice classes
+**** Maximum 4KB sector erase size
+**** Maximum 512 byte page size
+**** SPIF type components must support Serial Flash Discoverable Parameters (SFDP)
+
+
 # Release 3.2.5
 
 ## Bug Fixes
